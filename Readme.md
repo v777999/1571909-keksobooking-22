@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Viktor Lugovskoy](https://up.htmlacademy.ru/javascript/22/user/1571909).
-* Наставник: `Неизвестно`.
+* Наставник: [Роман Марченко](https://htmlacademy.ru/profile/id505487).
 
 ---
 
