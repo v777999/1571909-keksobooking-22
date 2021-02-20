@@ -25,4 +25,25 @@ const getRandomArrayValues = (arrayName) => {
   return arrayName.slice(getRandomInteger(0, arrayName.length - 1));
 }
 
-export {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues}
+const numIncline = (num, words) => {
+  num = Math.abs(num) % 100;
+  let num1 = num % 10;
+  if (num > 10 && num < 20) {
+    return words[2];
+  }
+  if (num1 > 1 && num1 < 5) {
+    return words[1];
+  }
+  if (num1 === 1) {
+    return words[0];
+  }
+  return words[2];
+}
+
+const getDeleteChild = (parentElement) => {
+  while (parentElement.firstChild) {
+    parentElement.removeChild(parentElement.lastChild);
+  }
+};
+
+export {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues, numIncline, getDeleteChild}
