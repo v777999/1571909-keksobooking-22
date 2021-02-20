@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues} from './util.js';
+import {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues} from './utils.js';
 
 const DESCRIPTION = [
   'Тихий район, уютно, вид на парк',
@@ -41,6 +41,26 @@ const PROPERTY_PHOTOS = [
   'http://o0.github.io/assets/images/tokyo/hotel3.jpg',
 ];
 
+const AVATAR = {
+  min: 1,
+  max: 8,
+};
+
+const PRICE = {
+  min: 50,
+  max: 10000,
+};
+
+const ROOMS = {
+  min: 1,
+  max: 99,
+};
+
+const GUESTS = {
+  min: 1,
+  max: 27,
+};
+
 const LOCATION_X_MIN = 35.65000;
 const LOCATION_X_MAX = 35.70000;
 const LOCATION_Y_MIN = 139.70000;
@@ -51,14 +71,15 @@ const SIMILAR_AD_COUNT = 10;
 const createAd = () => {
   return {
     author: {
-      avatar: 'img/avatars/user0' + getRandomInteger(1, 8) + '.png',
+      avatar: 'img/avatars/user0' + getRandomInteger(AVATAR.min, AVATAR.max) + '.png',
     },
     offer: {
       title: getRandomArrayElement(TITLE),
-      address: getRandomFloat(LOCATION_X_MIN, LOCATION_X_MAX,5) + ', ' + getRandomFloat(LOCATION_Y_MIN, LOCATION_Y_MAX,5),
-      price: getRandomInteger(50,10000),
+      address: getRandomFloat(LOCATION_X_MIN, LOCATION_X_MAX, 5) + ', ' + getRandomFloat(LOCATION_Y_MIN, LOCATION_Y_MAX, 5),
+      price: getRandomInteger(PRICE.min, PRICE.max),
       type: getRandomArrayElement(PROPERTY_TYPE),
-      rooms: getRandomInteger(1,99),
+      rooms: getRandomInteger(ROOMS.min, ROOMS.max),
+      guests: getRandomInteger(GUESTS.min, GUESTS.max),
       checkin: getRandomArrayElement(CHECK_TIME),
       checkout: getRandomArrayElement(CHECK_TIME),
       features: getRandomArrayValues(PROPERTY_FEATURES),
@@ -72,4 +93,6 @@ const createAd = () => {
   }
 }
 
-export {createAd, SIMILAR_AD_COUNT};
+const createAdList = new Array(SIMILAR_AD_COUNT).fill(null).map(() => createAd());
+
+export {createAdList, PROPERTY_TYPE};
