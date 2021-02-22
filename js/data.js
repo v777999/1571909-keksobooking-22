@@ -53,12 +53,12 @@ const PRICE = {
 
 const ROOMS = {
   min: 1,
-  max: 99,
+  max: 9,
 };
 
 const GUESTS = {
   min: 1,
-  max: 27,
+  max: 9,
 };
 
 const LOCATION_X_MIN = 35.65000;
@@ -77,6 +77,7 @@ const createAd = () => {
       title: getRandomArrayElement(TITLE),
       address: getRandomFloat(LOCATION_X_MIN, LOCATION_X_MAX, 5) + ', ' + getRandomFloat(LOCATION_Y_MIN, LOCATION_Y_MAX, 5),
       price: getRandomInteger(PRICE.min, PRICE.max),
+      //type: getRandomArrayElement(PROPERTY_TYPE),
       type: getRandomArrayElement(PROPERTY_TYPE),
       rooms: getRandomInteger(ROOMS.min, ROOMS.max),
       guests: getRandomInteger(GUESTS.min, GUESTS.max),
