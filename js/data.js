@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues} from './utils.js';
+import {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues} from './util.js';
 
 const DESCRIPTION = [
   'Тихий район, уютно, вид на парк',
@@ -77,7 +77,6 @@ const createAd = () => {
       title: getRandomArrayElement(TITLE),
       address: getRandomFloat(LOCATION_X_MIN, LOCATION_X_MAX, 5) + ', ' + getRandomFloat(LOCATION_Y_MIN, LOCATION_Y_MAX, 5),
       price: getRandomInteger(PRICE.min, PRICE.max),
-      //type: getRandomArrayElement(PROPERTY_TYPE),
       type: getRandomArrayElement(PROPERTY_TYPE),
       rooms: getRandomInteger(ROOMS.min, ROOMS.max),
       guests: getRandomInteger(GUESTS.min, GUESTS.max),
