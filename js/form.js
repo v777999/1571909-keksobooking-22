@@ -1,8 +1,16 @@
+import {isEscEvent, isClickEvent} from './util.js';
+import {sendData} from './api.js';
+import {mainMarker,CENTER_LAT, CENTER_LNG} from './map.js';
+
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
+const main = document.querySelector('main');
+const successMessage = document.querySelector('#success').content.querySelector('.success');
+const errorMessage = document.querySelector('#error').content.querySelector('.error');
+const mapFilters = document.querySelector('.map__filters');
 const addForm = document.querySelector('.ad-form');
-const fieldsetsAddForm = addForm.querySelectorAll('fieldset');
+
 const titleAd = addForm.querySelector('#title');
 const typeProperty = addForm.querySelector('#type');
 const priceInput = addForm.querySelector('#price');
@@ -10,6 +18,8 @@ const roomNumber = addForm.querySelector('#room_number');
 const capacity = addForm.querySelector('#capacity');
 const timeIn = addForm.querySelector('#timein');
 const timeOut = addForm.querySelector('#timeout');
+const resetButton = addForm.querySelector('.ad-form__reset');
+const addressForm = addForm.querySelector('#address');
 
 const minPrice = {
   'bungalow': 0,
@@ -18,6 +28,7 @@ const minPrice = {
   'palace': 10000,
 };
 
+/*
 const deactivateForm = () => {
   addForm.classList.add('ad-form--disabled');
 
@@ -35,7 +46,7 @@ const activateForm = () => {
     element.disabled = false;
   });
 };
-
+*/
 
 titleAd.addEventListener('invalid', () => {
   if (titleAd.validity.valueMissing) {
@@ -106,4 +117,52 @@ timeOut.addEventListener('change', () => {
   timeIn.value = timeOut.value;
 });
 
-export {activateForm};
+const resetAddForm = () => {
+  addForm.reset();
+  mapFilters.reset();
+  mainMarker.setLatLng({lat: CENTER_LAT, lng: CENTER_LNG});
+  addressForm.value = `${CENTER_LAT}, ${CENTER_LNG}`;
+};
+
+resetButton.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  resetAddForm();
+});
+
+const closeMessage = (evt) => {
+  if (isEscEvent(evt) || isClickEvent(evt)) {
+    evt.preventDefault();
+    successMessage.remove();
+    errorMessage.remove();
+    document.removeEventListener('keydown', closeMessage);
+    document.removeEventListener('mousedown', closeMessage);
+  }
+};
+
+const showSuccessMessage = () => {
+  main.append(successMessage);
+  resetAddForm();
+  document.addEventListener('keydown', closeMessage);
+  document.addEventListener('click', closeMessage);
+};
+
+const showErrorMessage = () => {
+  main.append(errorMessage);
+  document.addEventListener('keydown', closeMessage);
+  document.addEventListener('click', closeMessage);
+}
+
+const setFormSubmit = () => {
+  addForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => showSuccessMessage(),
+      () => showErrorMessage(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+export {setFormSubmit};
+//export {activateForm};

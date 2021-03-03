@@ -1,3 +1,4 @@
+/*
 import {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues} from './util.js';
 
 const DESCRIPTION = [
@@ -96,3 +97,4 @@ const createAd = () => {
 const createAdList = new Array(SIMILAR_AD_COUNT).fill(null).map(() => createAd());
 
 export {createAdList, PROPERTY_TYPE};
+*/
