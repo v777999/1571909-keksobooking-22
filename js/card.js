@@ -1,4 +1,3 @@
-import {createAdList} from './data.js';
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
@@ -46,5 +45,4 @@ const createCard = (createAdList) => {
   return cardElement;
 };
 
-createAdList;
 export {createCard};
