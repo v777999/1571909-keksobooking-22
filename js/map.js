@@ -1,15 +1,17 @@
 //import {activateForm} from './form.js';
 //import {createAdList} from './data.js';
 import {createCard} from './card.js';
+import {createFilter} from './filter.js';
 
+const CENTER_LAT = 35.6708;
+const CENTER_LNG = 139.7372;
+const ZOOM = 10;
+const SIMILAR_AD_COUNT = 10;
 const formAd = document.querySelector('.ad-form');
 const fieldsetsFormAd = formAd.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
 const filters = mapFilters.querySelectorAll('select, fieldset');
 const addressForm = document.querySelector('#address');
-const CENTER_LAT = 35.6708;
-const CENTER_LNG = 139.7372;
-const ZOOM = 10;
 
 const deactivateForm = () => {
   formAd.classList.add('ad-form--disabled');
@@ -49,10 +51,7 @@ const activateFilters = () => {
 
 /* global L:readonly */
 const map = L.map('map-canvas')
-  .on('load', () => {
-    activateFilters();
-    activateForm();
-  })
+  .on('load', deactivateForm, deactivateFilters)
   .setView({
     lat: CENTER_LAT,
     lng: CENTER_LNG,
@@ -102,23 +101,35 @@ const pinIcon = L.icon(
   },
 );
 
+const markersLayer = new L.LayerGroup();
+
 const createAdList = (data) => {
-  data.forEach((element) => {
-    const marker = L.marker(
-      {
-        lat: element.location.lat,
-        lng: element.location.lng,
-      },
-      {
-        icon: pinIcon,
-      },
-    );
-    marker
-      .addTo(map)
-      .bindPopup(
-        createCard(element),
+  markersLayer.clearLayers();
+  data
+    .slice()
+    .filter(createFilter)
+    .slice(0, SIMILAR_AD_COUNT)
+    .forEach((element) => {
+      const marker = L.marker(
+        {
+          lat: element.location.lat,
+          lng: element.location.lng,
+        },
+        {
+          icon: pinIcon,
+        },
       );
-  });
+      marker
+        .addTo(map)
+        .bindPopup(
+          createCard(element),
+        );
+      markersLayer.addLayer(marker);
+    });
+  markersLayer.addTo(map);
+  activateFilters();
+  activateForm();
 };
+
 
 export {createAdList, mainMarker, CENTER_LAT, CENTER_LNG};
