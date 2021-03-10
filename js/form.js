@@ -1,6 +1,7 @@
-import {isEscEvent, isClickEvent} from './util.js';
-import {sendData} from './api.js';
-import {mainMarker,CENTER_LAT, CENTER_LNG} from './map.js';
+import { isEscEvent, isClickEvent } from './util.js';
+import { sendData } from './api.js';
+import { mainMarker, CENTER_LAT, CENTER_LNG } from './map.js';
+import { clearPreviewImages } from './avatar.js';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -28,26 +29,6 @@ const minPrice = {
   'palace': 10000,
 };
 
-/*
-const deactivateForm = () => {
-  addForm.classList.add('ad-form--disabled');
-
-  fieldsetsAddForm.forEach((element) => {
-    element.disabled = true;
-  });
-};
-
-deactivateForm();
-
-const activateForm = () => {
-  addForm.classList.remove('ad-form--disabled');
-
-  fieldsetsAddForm.forEach((element) => {
-    element.disabled = false;
-  });
-};
-*/
-
 titleAd.addEventListener('invalid', () => {
   if (titleAd.validity.valueMissing) {
     titleAd.setCustomValidity('Обязательное поле')
@@ -61,9 +42,9 @@ titleAd.addEventListener('input', () => {
   const valueLength = titleAd.value.length;
 
   if (valueLength < MIN_TITLE_LENGTH) {
-    titleAd.setCustomValidity('Еще '+ (MIN_TITLE_LENGTH - valueLength) +' симв.');
+    titleAd.setCustomValidity('Еще ' + (MIN_TITLE_LENGTH - valueLength) + ' симв.');
   } else if (valueLength > MAX_TITLE_LENGTH) {
-    titleAd.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) +' симв.');
+    titleAd.setCustomValidity('Удалите лишние ' + (valueLength - MAX_TITLE_LENGTH) + ' симв.');
   } else {
     titleAd.setCustomValidity('');
   }
@@ -120,8 +101,9 @@ timeOut.addEventListener('change', () => {
 const resetAddForm = () => {
   addForm.reset();
   mapFilters.reset();
-  mainMarker.setLatLng({lat: CENTER_LAT, lng: CENTER_LNG});
+  mainMarker.setLatLng({ lat: CENTER_LAT, lng: CENTER_LNG });
   addressForm.value = `${CENTER_LAT}, ${CENTER_LNG}`;
+  clearPreviewImages();
 };
 
 resetButton.addEventListener('click', (evt) => {
@@ -164,5 +146,4 @@ const setFormSubmit = () => {
   });
 };
 
-export {setFormSubmit};
-//export {activateForm};
+export { setFormSubmit };
