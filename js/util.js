@@ -3,7 +3,7 @@ const ALERT_SHOW_TIME = 5000;
 const isRangeValid = (min, max) => min >= 0 && max >= 0 && !(min >= max);
 
 let getRandomInteger = (min, max) => {
-  if(!isRangeValid(min, max)) {
+  if (!isRangeValid(min, max)) {
     return null;
   }
   min = Math.ceil(min);
@@ -12,7 +12,7 @@ let getRandomInteger = (min, max) => {
 };
 
 const getRandomFloat = (min, max, decimals = 1) => {
-  if(!isRangeValid(min, max)) {
+  if (!isRangeValid(min, max)) {
     return null;
   }
   const result = Math.random() * (max - min) + min;
@@ -77,4 +77,4 @@ const isClickEvent = (evt) => {
   return evt.type === 'click';
 };
 
-export {getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues, numIncline, getDeleteChild, showAlert, isEscEvent, isClickEvent }
+export { getRandomInteger, getRandomFloat, getRandomArrayElement, getRandomArrayValues, numIncline, getDeleteChild, showAlert, isEscEvent, isClickEvent }

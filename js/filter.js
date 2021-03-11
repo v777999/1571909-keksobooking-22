@@ -36,10 +36,10 @@ const filterFeatures = (data) => {
 const createFilter = (data) => {
 
   if ((data.offer.type === housingType.value || housingType.value === DEFAULT_TYPE)
-  && (data.offer.rooms === +housingRooms.value || housingRooms.value === DEFAULT_TYPE)
-  && (filterPrice(data) || housingPrice.value === DEFAULT_TYPE)
-  && (data.offer.guests === +housingGuests.value || housingGuests.value === DEFAULT_TYPE)
-  && (filterFeatures(data))
+    && (data.offer.rooms === +housingRooms.value || housingRooms.value === DEFAULT_TYPE)
+    && (filterPrice(data) || housingPrice.value === DEFAULT_TYPE)
+    && (data.offer.guests === +housingGuests.value || housingGuests.value === DEFAULT_TYPE)
+    && (filterFeatures(data))
   ) {
     return data;
   }
@@ -52,4 +52,4 @@ const changeFilter = (cb) => {
   });
 };
 
-export {createFilter, changeFilter};
+export { createFilter, changeFilter };

@@ -45,4 +45,4 @@ const createCard = (createAdList) => {
   return cardElement;
 };
 
-export {createCard};
+export { createCard };

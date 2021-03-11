@@ -1,7 +1,5 @@
-//import {activateForm} from './form.js';
-//import {createAdList} from './data.js';
-import {createCard} from './card.js';
-import {createFilter} from './filter.js';
+import { createCard } from './card.js';
+import { createFilter } from './filter.js';
 
 const CENTER_LAT = 35.6708;
 const CENTER_LNG = 139.7372;
@@ -64,7 +62,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const mainPinIcon = L.icon (
+const mainPinIcon = L.icon(
   {
     iconUrl: './img/main-pin.svg',
     iconSize: [50, 50],
@@ -132,4 +130,4 @@ const createAdList = (data) => {
 };
 
 
-export {createAdList, mainMarker, CENTER_LAT, CENTER_LNG};
+export { createAdList, mainMarker, CENTER_LAT, CENTER_LNG };

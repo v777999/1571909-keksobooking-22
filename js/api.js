@@ -1,4 +1,4 @@
-import {showAlert} from './util.js';
+import { showAlert } from './util.js';
 
 const getData = (onSuccess) => {
   fetch('https://22.javascript.pages.academy/keksobooking/data')
@@ -16,7 +16,7 @@ const getData = (onSuccess) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch (
+  fetch(
     'https://22.javascript.pages.academy/keksobooking/',
     {
       method: 'POST',
@@ -35,4 +35,4 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-export {getData, sendData};
+export { getData, sendData };
