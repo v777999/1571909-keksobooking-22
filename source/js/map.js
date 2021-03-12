@@ -1,3 +1,5 @@
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { createCard } from './card.js';
 import { createFilter } from './filter.js';
 
@@ -47,7 +49,6 @@ const activateFilters = () => {
   });
 };
 
-/* global L:readonly */
 const map = L.map('map-canvas')
   .on('load', deactivateForm, deactivateFilters)
   .setView({
