@@ -1,4 +1,5 @@
-/* global _:readonly */
+import 'leaflet/dist/leaflet.css';
+import debounce from 'lodash/debounce';
 import './form.js';
 import './map.js';
 import { getData } from './api.js';
@@ -13,7 +14,7 @@ setFormSubmit();
 
 getData((data) => {
   createAdList(data);
-  changeFilter(_.debounce(() => createAdList(data), RERENDER_DELAY));
+  changeFilter(debounce(() => createAdList(data), RERENDER_DELAY));
 });
 
 setFormSubmit();
