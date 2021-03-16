@@ -1,4 +1,4 @@
-
+'use strict';
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const propertyType = {

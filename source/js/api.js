@@ -1,3 +1,4 @@
+'use strict';
 import { showAlert } from './util.js';
 
 const getData = (onSuccess) => {

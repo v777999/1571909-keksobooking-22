@@ -1,3 +1,4 @@
+'use strict';
 import { isEscEvent, isClickEvent } from './util.js';
 import { sendData } from './api.js';
 import { mainMarker, CENTER_LAT, CENTER_LNG } from './map.js';

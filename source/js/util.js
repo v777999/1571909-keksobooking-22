@@ -1,3 +1,4 @@
+'use strict';
 const ALERT_SHOW_TIME = 5000;
 
 const isRangeValid = (min, max) => min >= 0 && max >= 0 && !(min >= max);

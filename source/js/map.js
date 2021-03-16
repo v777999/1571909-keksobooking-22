@@ -1,3 +1,4 @@
+'use strict';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { createCard } from './card.js';
@@ -21,8 +22,6 @@ const deactivateForm = () => {
   });
 };
 
-deactivateForm();
-
 const activateForm = () => {
   formAd.classList.remove('ad-form--disabled');
 
@@ -39,15 +38,15 @@ const deactivateFilters = () => {
   });
 };
 
-deactivateFilters();
+//deactivateFilters();
 
-const activateFilters = () => {
+function activateFilters() {
   mapFilters.classList.remove('map__filters--disabled');
 
   filters.forEach((element) => {
     element.disabled = false;
   });
-};
+}
 
 const map = L.map('map-canvas')
   .on('load', deactivateForm, deactivateFilters)
@@ -131,4 +130,4 @@ const createAdList = (data) => {
 };
 
 
-export { createAdList, mainMarker, CENTER_LAT, CENTER_LNG };
+export { createAdList, mainMarker, CENTER_LAT, CENTER_LNG, deactivateForm, deactivateFilters };
