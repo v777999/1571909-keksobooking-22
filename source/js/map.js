@@ -1,3 +1,4 @@
+'use strict';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { createCard } from './card.js';
@@ -21,8 +22,6 @@ const deactivateForm = () => {
   });
 };
 
-deactivateForm();
-
 const activateForm = () => {
   formAd.classList.remove('ad-form--disabled');
 
@@ -38,8 +37,6 @@ const deactivateFilters = () => {
     element.disabled = true;
   });
 };
-
-deactivateFilters();
 
 const activateFilters = () => {
   mapFilters.classList.remove('map__filters--disabled');
@@ -130,5 +127,4 @@ const createAdList = (data) => {
   activateForm();
 };
 
-
-export { createAdList, mainMarker, CENTER_LAT, CENTER_LNG };
+export { CENTER_LAT, CENTER_LNG, createAdList, mainMarker, deactivateForm, deactivateFilters  };
