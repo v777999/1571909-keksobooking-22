@@ -46,6 +46,9 @@ const activateFilters = () => {
   });
 };
 
+deactivateForm();
+deactivateFilters();
+
 const map = L.map('map-canvas')
   .on('load', deactivateForm, deactivateFilters)
   .setView({
@@ -127,4 +130,4 @@ const createAdList = (data) => {
   activateForm();
 };
 
-export { CENTER_LAT, CENTER_LNG, createAdList, mainMarker, deactivateForm, deactivateFilters  };
+export { CENTER_LAT, CENTER_LNG, createAdList, mainMarker };
