@@ -8,6 +8,8 @@ import { changeFilter } from './filter';
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
 const MAX_PRICE = 1000000;
+const roomNumberMaxValue = '100';
+const capacityMinValue = '0';
 const main = document.querySelector('main');
 const successMessage = document.querySelector('#success').content.querySelector('.success');
 const errorMessage = document.querySelector('#error').content.querySelector('.error');
@@ -58,7 +60,7 @@ priceInput.addEventListener('input', () => {
   const priceValue = priceInput.value;
 
   if (priceValue > MAX_PRICE) {
-    priceInput.setCustomValidity('Цена не может быть больше ' + MAX_PRICE);
+    priceInput.setCustomValidity(`Цена не может быть больше ${MAX_PRICE}`);
   } else {
     priceInput.setCustomValidity('');
   }
@@ -71,9 +73,9 @@ typeProperty.addEventListener('change', () => {
 });
 
 const checkPlace = () => {
-  if (roomNumber.value === '100' && capacity.value !== '0') {
+  if (roomNumber.value === roomNumberMaxValue && capacity.value !== capacityMinValue) {
     capacity.setCustomValidity('Выберите вариант "Не для гостей"');
-  } else if (roomNumber.value !== '100' && capacity.value === '0') {
+  } else if (roomNumber.value !== roomNumberMaxValue && capacity.value === capacityMinValue) {
     capacity.setCustomValidity('Выберите другой вариант');
   } else if (roomNumber.value < capacity.value) {
     capacity.setCustomValidity('Выберите меньшее число гостей');
@@ -116,6 +118,7 @@ const resetAddForm = () => {
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   resetAddForm();
+  resetButton.removeEventListener('click', (evt));
 });
 
 const closeMessage = (evt) => {
@@ -124,7 +127,7 @@ const closeMessage = (evt) => {
     successMessage.remove();
     errorMessage.remove();
     document.removeEventListener('keydown', closeMessage);
-    document.removeEventListener('mousedown', closeMessage);
+    document.removeEventListener('click', closeMessage);
     resetAddForm();
   }
 };
@@ -151,4 +154,3 @@ const setFormSubmit = () => {
   resetAddForm();
 };
 setFormSubmit();
-//export { setFormSubmit };

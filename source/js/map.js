@@ -7,6 +7,19 @@ const TOKYO_CENTER_COORD = {
   lat: 35.6708,
   lng: 139.7372,
 };
+
+const MAIN_PIN_DATA = {
+  iconUrl: './img/main-pin.svg',
+  iconSize: [50, 50],
+  iconAnchor: [25, 50],
+};
+
+const PIN_DATA =   {
+  iconUrl: './img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
+};
+
 const CENTER_LAT = 35.6708;
 const CENTER_LNG = 139.7372;
 const ZOOM = 10;
@@ -67,13 +80,7 @@ L.tileLayer(
   },
 ).addTo(map);
 
-const mainPinIcon = L.icon(
-  {
-    iconUrl: './img/main-pin.svg',
-    iconSize: [50, 50],
-    iconAnchor: [25, 50],
-  },
-);
+const mainPinIcon = L.icon(MAIN_PIN_DATA);
 
 const mainMarker = L.marker(
   {
@@ -96,13 +103,7 @@ mainMarker.on('moveend', () => {
   addressForm.value = `${lat}, ${lng}`;
 });
 
-const pinIcon = L.icon(
-  {
-    iconUrl: './img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  },
-);
+const pinIcon = L.icon(PIN_DATA);
 
 const markersLayer = new L.LayerGroup();
 
