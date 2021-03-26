@@ -1,4 +1,3 @@
-'use strict';
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const getAvatar = document.querySelector('.ad-form-header__input');

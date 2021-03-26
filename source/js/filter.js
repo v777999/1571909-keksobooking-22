@@ -1,17 +1,15 @@
-'use strict';
+const DEFAULT_TYPE = 'any';
+const Price = {
+  LOW: 10000,
+  HIGH: 50000,
+};
+
 const mapFilters = document.querySelector('.map__filters');
 const housingType = mapFilters.querySelector('#housing-type');
 const housingPrice = mapFilters.querySelector('#housing-price');
 const housingRooms = mapFilters.querySelector('#housing-rooms');
 const housingGuests = mapFilters.querySelector('#housing-guests');
 const housingFeatures = mapFilters.querySelector('#housing-features');
-
-const DEFAULT_TYPE = 'any';
-
-const Price = {
-  LOW: 10000,
-  HIGH: 50000,
-};
 
 const filterPrice = (data) => {
   switch (housingPrice.value) {
@@ -53,4 +51,12 @@ const changeFilter = (cb) => {
   });
 };
 
-export { createFilter, changeFilter };
+const setFilterReset = (cb) => {
+  mapFilters.addEventListener('reset', () => {
+    setTimeout(() => {
+      cb();
+    }, 0);
+  });
+};
+
+export { createFilter, changeFilter, setFilterReset };

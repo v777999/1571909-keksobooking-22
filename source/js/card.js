@@ -1,4 +1,3 @@
-'use strict';
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const propertyType = {
@@ -15,6 +14,10 @@ const createCard = (createAdList) => {
   const photo = cardElement.querySelector('.popup__photo');
 
   const generateFeatures = () => {
+    if (!createAdList.offer.features.length) {
+      cardFeatures.remove();
+      return;
+    }
     cardFeatures.innerHTML = '';
     createAdList.offer.features.forEach((item, i) => {
       const feature = document.createElement('li');
@@ -31,14 +34,30 @@ const createCard = (createAdList) => {
     });
   };
 
-  cardElement.querySelector('.popup__title').textContent = createAdList.offer.title;
-  cardElement.querySelector('.popup__text--address').textContent = createAdList.offer.address;
-  cardElement.querySelector('.popup__text--price').textContent = createAdList.offer.price + ' ₽/ночь';
-  cardElement.querySelector('.popup__type').textContent = propertyType[createAdList.offer.type];
-  cardElement.querySelector('.popup__text--capacity').textContent = createAdList.offer.rooms + ' комнаты для ' + createAdList.offer.guests + ' гостей';
-  cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + createAdList.offer.checkin + ', выезд до ' + createAdList.offer.checkout;
-  cardElement.querySelector('.popup__description').textContent = createAdList.offer.description;
-  cardElement.querySelector('.popup__avatar').src = createAdList.author.avatar;
+  const offerTitle = cardElement.querySelector('.popup__title');
+  createAdList.offer.title ? offerTitle.textContent = createAdList.offer.title : offerTitle.remove();
+
+  const offerAddress = cardElement.querySelector('.popup__text--address');
+  createAdList.offer.address ? offerAddress.textContent = createAdList.offer.address : offerAddress.remove();
+
+  const offerPrice = cardElement.querySelector('.popup__text--price');
+  createAdList.offer.price ? offerPrice.textContent = createAdList.offer.price + ' ₽/ночь' : offerPrice.remove();
+
+  const offerType = cardElement.querySelector('.popup__type');
+  createAdList.offer.type ? offerType.textContent = propertyType[createAdList.offer.type] : offerType.remove();
+
+  const offerCapacity = cardElement.querySelector('.popup__text--capacity');
+  createAdList.offer.rooms && createAdList.offer.guests ? offerCapacity.textContent = createAdList.offer.rooms + ' комнаты для ' + createAdList.offer.guests + ' гостей' : offerCapacity.remove();
+
+  const offerTime = cardElement.querySelector('.popup__text--time');
+  createAdList.offer.checkin && createAdList.offer.checkout ? offerTime.textContent = 'Заезд после ' + createAdList.offer.checkin + ', выезд до ' + createAdList.offer.checkout : offerTime.remove();
+
+  const offerDescription = cardElement.querySelector('.popup__description');
+  createAdList.offer.description ? offerDescription.textContent = createAdList.offer.description : offerDescription.remove();
+
+  const offerAvatar = cardElement.querySelector('.popup__avatar');
+  createAdList.author.avatar ? offerAvatar.src = createAdList.author.avatar : offerAvatar.remove();
+
   generateFeatures();
   generatePhotos();
 

@@ -1,13 +1,17 @@
-'use strict';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { createCard } from './card.js';
 import { createFilter } from './filter.js';
 
+const TOKYO_CENTER_COORD = {
+  lat: 35.6708,
+  lng: 139.7372,
+};
 const CENTER_LAT = 35.6708;
 const CENTER_LNG = 139.7372;
 const ZOOM = 10;
 const SIMILAR_AD_COUNT = 10;
+const RERENDER_DELAY = 500;
 const formAd = document.querySelector('.ad-form');
 const fieldsetsFormAd = formAd.querySelectorAll('fieldset');
 const mapFilters = document.querySelector('.map__filters');
@@ -102,6 +106,12 @@ const pinIcon = L.icon(
 
 const markersLayer = new L.LayerGroup();
 
+const resetMarker = () => {
+  map.setView(TOKYO_CENTER_COORD, ZOOM);
+  map.closePopup();
+  mainMarker.setLatLng(TOKYO_CENTER_COORD)
+}
+
 const createAdList = (data) => {
   markersLayer.clearLayers();
   data
@@ -130,4 +140,4 @@ const createAdList = (data) => {
   activateForm();
 };
 
-export { CENTER_LAT, CENTER_LNG, createAdList, mainMarker };
+export { CENTER_LAT, CENTER_LNG, RERENDER_DELAY, createAdList, mainMarker, resetMarker };

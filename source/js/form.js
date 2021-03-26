@@ -1,8 +1,9 @@
-'use strict';
+import debounce from 'lodash/debounce';
 import { isEscEvent, isClickEvent } from './util.js';
-import { sendData } from './api.js';
-import { mainMarker, CENTER_LAT, CENTER_LNG } from './map.js';
+import { sendData, getData } from './api.js';
+import { createAdList, mainMarker, CENTER_LAT, CENTER_LNG, RERENDER_DELAY, resetMarker } from './map.js';
 import { clearPreviewImages } from './avatar.js';
+import { changeFilter } from './filter';
 
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
@@ -37,7 +38,6 @@ titleAd.addEventListener('invalid', () => {
     titleAd.setCustomValidity('');
   }
 });
-
 
 titleAd.addEventListener('input', () => {
   const valueLength = titleAd.value.length;
@@ -103,8 +103,14 @@ const resetAddForm = () => {
   addForm.reset();
   mapFilters.reset();
   mainMarker.setLatLng({ lat: CENTER_LAT, lng: CENTER_LNG });
+  priceInput.placeholder = minPrice[typeProperty.value];
   addressForm.value = `${CENTER_LAT}, ${CENTER_LNG}`;
   clearPreviewImages();
+  resetMarker();
+  getData((data) => {
+    createAdList(data);
+    changeFilter(debounce(() => createAdList(data), RERENDER_DELAY));
+  });
 };
 
 resetButton.addEventListener('click', (evt) => {
@@ -119,6 +125,7 @@ const closeMessage = (evt) => {
     errorMessage.remove();
     document.removeEventListener('keydown', closeMessage);
     document.removeEventListener('mousedown', closeMessage);
+    resetAddForm();
   }
 };
 
@@ -133,18 +140,15 @@ const showErrorMessage = () => {
   main.append(errorMessage);
   document.addEventListener('keydown', closeMessage);
   document.addEventListener('click', closeMessage);
+  resetAddForm();
 }
 
 const setFormSubmit = () => {
   addForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-
-    sendData(
-      () => showSuccessMessage(),
-      () => showErrorMessage(),
-      new FormData(evt.target),
-    );
+    sendData(showSuccessMessage, showErrorMessage, new FormData(evt.target));
   });
+  resetAddForm();
 };
-
-export { setFormSubmit };
+setFormSubmit();
+//export { setFormSubmit };
