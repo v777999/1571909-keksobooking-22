@@ -27,6 +27,10 @@ const createCard = (createAdList) => {
   };
 
   const generatePhotos = () => {
+    if (!createAdList.offer.photos.length) {
+      cardPhotos.remove();
+      return;
+    }
     cardPhotos.innerHTML = '';
     createAdList.offer.photos.forEach((item, i) => {
       photo.src = createAdList.offer.photos[i];
