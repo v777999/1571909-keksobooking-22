@@ -118,7 +118,7 @@ const resetAddForm = () => {
 resetButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   resetAddForm();
-  resetButton.removeEventListener('click', (evt));
+  resetButton.removeEventListener('click');
 });
 
 const closeMessage = (evt) => {

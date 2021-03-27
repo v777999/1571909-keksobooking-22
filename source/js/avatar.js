@@ -5,23 +5,15 @@ const showAvatar = document.querySelector('.ad-form-header__preview');
 const getPhoto = document.querySelector('.ad-form__input');
 const showPhoto = document.querySelector('.ad-form__photo');
 
-const defaultAvatar = showAvatar.cloneNode(true);
-const defaultPhoto = showPhoto.cloneNode(true);
-
 const isFileTypeMatches = (extension) => {
   return FILE_TYPES.some((it) => {
     return extension.endsWith(it);
   })
 }
 
-const resetStyleAndInnerHTML = (resetElement, defaultElement) => {
-  resetElement.innerHTML = defaultElement.innerHTML;
-  resetElement.removeAttribute('style');
-}
-
 const clearPreviewImages = () => {
-  resetStyleAndInnerHTML(showAvatar, defaultAvatar);
-  resetStyleAndInnerHTML(showPhoto, defaultPhoto);
+  showAvatar.src = 'img/muffin-grey.svg';
+  showPhoto.innerHTML = '';
 }
 
 const setImageFile = (selector, preview) => {

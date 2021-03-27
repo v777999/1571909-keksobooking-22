@@ -3,11 +3,6 @@ import 'leaflet/dist/leaflet.css';
 import { createCard } from './card.js';
 import { createFilter } from './filter.js';
 
-const TOKYO_CENTER_COORD = {
-  lat: 35.6708,
-  lng: 139.7372,
-};
-
 const MAIN_PIN_DATA = {
   iconUrl: './img/main-pin.svg',
   iconSize: [50, 50],
@@ -108,9 +103,15 @@ const pinIcon = L.icon(PIN_DATA);
 const markersLayer = new L.LayerGroup();
 
 const resetMarker = () => {
-  map.setView(TOKYO_CENTER_COORD, ZOOM);
+  map.setView({
+    lat: CENTER_LAT,
+    lng: CENTER_LNG,
+  }, ZOOM);
   map.closePopup();
-  mainMarker.setLatLng(TOKYO_CENTER_COORD)
+  mainMarker.setLatLng({
+    lat: CENTER_LAT,
+    lng: CENTER_LNG,
+  })
 }
 
 const createAdList = (data) => {
